@@ -7,12 +7,15 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Ask City',
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        primaryColor: Color(0xFF864ADB),
+        accentColor: Color(0xFFE7ECF0)
       ),
       initialRoute: '/Signup',
       routes: {

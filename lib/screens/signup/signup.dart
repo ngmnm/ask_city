@@ -1,3 +1,4 @@
+import 'package:ask_city/screens/signup/signin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -22,13 +23,13 @@ Widget _buildContent(BuildContext context) {
       SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-          width: double.infinity,
+          width: MediaQuery.of(context).size.height,
           height: MediaQuery.of(context).size.height,
           child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
             Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
               Text(
                 "تسجيل جديد",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
               ),
               SizedBox(
                 height: 30,
@@ -124,7 +125,7 @@ Widget _buildContent(BuildContext context) {
                               color: Color(0xFF864ADB)),
                         ),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.35,
+                          width: MediaQuery.of(context).size.width * 0.3,
                         ),
                         Text(
                           "البريد الالكتروني",
@@ -139,7 +140,7 @@ Widget _buildContent(BuildContext context) {
                       height: 5,
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.85,
+                      width: MediaQuery.of(context).size.width * 0.8,
                       child: TextField(
                         textInputAction: TextInputAction.next,
                         obscureText: false,
@@ -159,7 +160,8 @@ Widget _buildContent(BuildContext context) {
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -175,6 +177,7 @@ Widget _buildContent(BuildContext context) {
                       height: 5,
                     ),
                     Container(
+                      alignment: Alignment.center,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(16),
@@ -187,7 +190,7 @@ Widget _buildContent(BuildContext context) {
                           ),
                         ],
                       ),
-                      width: MediaQuery.of(context).size.width * 0.85,
+                      width: MediaQuery.of(context).size.width * 0.8,
                       child: TextField(
                         textInputAction: TextInputAction.go,
                         textDirection: TextDirection.rtl,
@@ -212,13 +215,12 @@ Widget _buildContent(BuildContext context) {
                 RichText(
                   text: TextSpan(
                     text: 'عضو بالفعل سجل دخولك  ',
-                    style: TextStyle(color: Colors.black87),
+                    style: TextStyle(color: Colors.black87, fontSize: 16),
                     children: const <TextSpan>[
                       TextSpan(
                           text: 'من هنا',
                           style: TextStyle(
-                            color: Color(0xFF864ADB),
-                          )),
+                              color: Color(0xFF864ADB), fontSize: 16)),
                     ],
                   ),
                 )
@@ -228,9 +230,12 @@ Widget _buildContent(BuildContext context) {
               height: 16,
             ),
             MaterialButton(
+
               minWidth: double.infinity,
               height: 48,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignIn()));
+              },
               color: Color(0xFF864ADB),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16)),
