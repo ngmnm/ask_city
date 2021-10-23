@@ -1,5 +1,8 @@
+import 'package:ask_city/common/theme_helper.dart';
 import 'package:ask_city/screens/signup/signin.dart';
+import 'package:ask_city/screens/widgets/header_widget.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -8,248 +11,188 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _buildContent(context),
-      backgroundColor: Color(0xFFE7ECF0),
-    );
-  }
-}
-
-Widget _buildContent(BuildContext context) {
-  return Stack(
-    children: [
-      SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-          width: MediaQuery.of(context).size.height,
-          height: MediaQuery.of(context).size.height,
-          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-            Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-              Text(
-                "تسجيل جديد",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+        backgroundColor: Color(0xFFE7ECF0),
+        body: SingleChildScrollView(
+          child: Stack(
+            children: [
+              Container(
+                height: 150,
+                child: HeaderWidget(150, false, Icons.person_add_alt_1_rounded),
               ),
-              SizedBox(
-                height: 30,
-              ),
-              Text(
-                "مرحبا بك في askcity",
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.grey[700], fontSize: 15),
-              ),
-            ]),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+              Container(
+                margin: EdgeInsets.fromLTRB(25, 50, 25, 10),
+                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                alignment: Alignment.center,
+                child: Column(
                   children: [
-                    Text(
-                      "الاسم الاخير",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black87),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      child: TextField(
-                        textDirection: TextDirection.rtl,
-                        textInputAction: TextInputAction.next,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          contentPadding:
-                              EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16)),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    )
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      "الاسم الاول",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black87),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      child: TextField(
-                        textDirection: TextDirection.rtl,
-                        textInputAction: TextInputAction.previous,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          contentPadding:
-                              EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16)),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    )
-                  ],
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          "استخدم رقم الجوال",
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              color: Color(0xFF864ADB)),
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.3,
-                        ),
-                        Text(
-                          "البريد الالكتروني",
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.black87),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      child: TextField(
-                        textInputAction: TextInputAction.next,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          contentPadding:
-                              EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16)),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    )
-                  ],
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      "كلمة السر",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black87),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 0,
-                            blurRadius: 4,
-                            offset: Offset(0, 4), // changes position of shadow
+                    Form(
+                        key: _formKey,
+                        child: Column(children: [
+                          GestureDetector(
+                            child: Stack(
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    border: Border.all(
+                                        width: 5, color: Colors.white),
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black12,
+                                        blurRadius: 20,
+                                        offset: const Offset(5, 5),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Icon(
+                                    Icons.person,
+                                    color: Colors.grey.shade300,
+                                    size: 80.0,
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.fromLTRB(80, 80, 0, 0),
+                                  child: Icon(
+                                    Icons.add_circle,
+                                    color: Colors.grey.shade700,
+                                    size: 25.0,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ],
+                          Text(
+                            "تسجيل جديد",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 30),
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Text(
+                            "مرحبا بك في askcity",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.grey[700], fontSize: 15),
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Container(
+                            child: TextFormField(
+                              textInputAction: TextInputAction.next,
+                              decoration: ThemeHelper().textInputDecoration(
+                                  'First Name', 'Enter your first name'),
+                            ),
+                            decoration:
+                                ThemeHelper().inputBoxDecorationShaddow(),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            child: TextFormField(
+                              textInputAction: TextInputAction.next,
+                              decoration: ThemeHelper().textInputDecoration(
+                                  'Last Name', 'Enter your last name'),
+                            ),
+                            decoration:
+                                ThemeHelper().inputBoxDecorationShaddow(),
+                          ),
+                          SizedBox(height: 20.0),
+                          Container(
+                            child: TextFormField(
+                              textInputAction: TextInputAction.next,
+                              decoration: ThemeHelper().textInputDecoration(
+                                  "E-mail address", "Enter your email"),
+                              keyboardType: TextInputType.emailAddress,
+                              validator: (val) {
+                                if (!(val!.isEmpty) &&
+                                    !RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$")
+                                        .hasMatch(val)) {
+                                  return "Enter a valid email address";
+                                }
+                                return null;
+                              },
+                            ),
+                            decoration:
+                                ThemeHelper().inputBoxDecorationShaddow(),
+                          ),
+                          SizedBox(height: 20.0),
+                          Container(
+                            child: TextFormField(
+                              obscureText: true,
+                              textInputAction: TextInputAction.next,
+                              decoration: ThemeHelper().textInputDecoration(
+                                  "Password*", "Enter your password"),
+                              validator: (val) {
+                                if (val!.isEmpty) {
+                                  return "Please enter your password";
+                                }
+                                return null;
+                              },
+                            ),
+                            decoration:
+                                ThemeHelper().inputBoxDecorationShaddow(),
+                          ),
+                          SizedBox(height: 30.0),
+                        ])),
+                    Container(
+                      decoration: ThemeHelper().buttonBoxDecoration(context),
+                      child: ElevatedButton(
+                        style: ThemeHelper().buttonStyle(),
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
+                          child: Text(
+                            'Sign Up'.toUpperCase(),
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                        ),
+                        onPressed: () {
+                          //After successful login we will redirect to profile page. Let's create profile page now
+                          // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ProfilePage()));
+                        },
                       ),
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      child: TextField(
-                        textInputAction: TextInputAction.go,
-                        textDirection: TextDirection.rtl,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          contentPadding:
-                              EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                          border: InputBorder.none,
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(10, 20, 10, 20),
+                      //child: Text('Don\'t have an account? Create'),
+                      child: Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(text: "Already have an account? "),
+                            TextSpan(
+                              text: 'LogIn',
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SignIn()));
+                                },
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).primaryColor),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 20,
-                    )
                   ],
                 ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                RichText(
-                  text: TextSpan(
-                    text: 'عضو بالفعل سجل دخولك  ',
-                    style: TextStyle(color: Colors.black87, fontSize: 16),
-                    children: const <TextSpan>[
-                      TextSpan(
-                          text: 'من هنا',
-                          style: TextStyle(
-                              color: Color(0xFF864ADB), fontSize: 16)),
-                    ],
-                  ),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            MaterialButton(
-
-              minWidth: double.infinity,
-              height: 48,
-              onPressed: () {
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignIn()));
-              },
-              color: Color(0xFF864ADB),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16)),
-              child: Text(
-                "تسجيل ",
-                style: TextStyle(
-                    fontWeight: FontWeight.w800,
-                    fontSize: 16,
-                    color: Colors.black87),
               ),
-            )
-          ]),
-        ),
-      ),
-    ],
-  );
+            ],
+          ),
+        ));
+  }
 }
