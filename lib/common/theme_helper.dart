@@ -74,4 +74,23 @@ class ThemeHelper {
       shadowColor: MaterialStateProperty.all(Colors.transparent),
     );
   }
+  AlertDialog alartDialog(String title, String content, BuildContext context) {
+    return AlertDialog(
+      title: Text(title),
+      content: Text(content),
+      actions: [
+        TextButton(
+          child: Text(
+            "OK",
+            style: TextStyle(color: Colors.white),
+          ),
+          style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.black38)),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
+    );
+  }
 }

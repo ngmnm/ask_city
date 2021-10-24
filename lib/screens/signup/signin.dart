@@ -4,13 +4,15 @@ import 'package:ask_city/screens/widgets/header_widget.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import 'forget_pass.dart';
+
 class SignIn extends StatefulWidget {
   @override
   _SignInState createState() => _SignInState();
 }
 
 class _SignInState extends State<SignIn> {
-  double _headerHeight = 150;
+  double _headerHeight = 250;
   Key _formKey = GlobalKey<FormState>();
 
   @override
@@ -21,8 +23,8 @@ class _SignInState extends State<SignIn> {
         child: Column(
           children: [
             Container(
-              height: 150,
-              child: HeaderWidget(150, true, Icons.login_rounded),
+              height: _headerHeight,
+              child: HeaderWidget(_headerHeight, true, Icons.login_rounded),
             ),
             SafeArea(
               child: Container(
@@ -74,7 +76,7 @@ class _SignInState extends State<SignIn> {
                             alignment: Alignment.topRight,
                             child: GestureDetector(
                               onTap: () {
-                                // Navigator.push( context, MaterialPageRoute( builder: (context) => ForgotPasswordPage()), );
+                                Navigator.push( context, MaterialPageRoute( builder: (context) => forgetPassword()), );
                               },
                               child: Text(
                                 "Forgot your password?",
